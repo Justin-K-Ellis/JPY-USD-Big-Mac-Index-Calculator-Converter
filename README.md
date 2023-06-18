@@ -1,0 +1,10 @@
+# JPY-USD Big Mac Index Calculator/Converter
+#### Video Demo: [Here](https://youtu.be/Y7olNw3FjB4)
+#### Description:
+The Big Mac Index is a way of measuring price partity between two currecies developed by the periodical *The Economist*. The basic idea is that we can understand the relative purchasing power of different currencies by comparing amounts required to buy certain (easily comparable) commodities--in this case, Big Macs. Because official currency exchange rates often differ noticably from the rates yielded by the Big Mac Index, it can be interesting to compare them.
+
+This program calculates the Big Mac Index for the Japanese Yen (JPY) compared to the US Dollar (USD). It works by using BeautifulSoup4 to scrape various sites for Big Mac prices in USD, JPY, and the official exchange rate at any given time (to my knowledge, there is no publicly available API provided by McDonalds for getting this information). The get_usd_price() and get_jpy_price() functions work by instansitating a BeautifulSoup class (soup) and passing them URLs via a requests object. The soup object then finds the required price information by parsing the html. The resulting str is then cleaned a bit to remove unnecessary information ("~" and "$" text) and then returned as a float (get_usd_price()) or an int (get_jpy_price()). These two operations are similar but handled by distinct functions since the html has to be parsed in different ways. The official exchange rate is similarly scraped from the internet.
+
+The Big Mac Index is calculated (by dividing the JPY amount by the USD amount) and printed to the user, along with the official rate and information and how undervalued the JPY is as a percentage (which is handled by the price_varience() function).
+
+The user is then given the chance to convert a sum of JPY to USD by the calculated Big Mac Index. The user is continually prompted to enter either "y" or "n", with y prompting the user to enter a yen sum and n exiting the program (other input results in the user being reprompted). A try-except block is implemented to catch non-numerical input, and such input results in the user being reprompted.
